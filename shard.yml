@@ -1,0 +1,17 @@
+name: git-index
+version: 1.0.2
+
+authors:
+  - Kirk Haines <wyhaines@gmail.com>
+
+targets:
+  git-index:
+    main: src/git-index.cr
+
+crystal: 0.36.1
+
+license: "Apache 2.0"
+
+dependencies:
+  sqlite3:
+    github: crystal-lang/crystal-sqlite3
