@@ -1,13 +1,17 @@
 require "option_parser"
 
-module GitIndex
+class GitIndex
   module Config
     def self.parse_command_line
-      config = {
-        "database" => "#{ENV["HOME"]}/.git-index.db",
+      config = Hash(String, Bool | String | Symbol).new
+      {
+        "database" => "sqlite3://#{ENV["HOME"]}/.git-index.db",
         "recurse"  => false,
         "verbose"  => false,
-      }
+        "dryrun"   => false
+    }.each {|k,v| config[k] = v}
+
+    leftover_argv = [] of String
 
       options = OptionParser.new do |opts|
         opts.banner = <<-EBANNER
@@ -16,7 +20,7 @@ module GitIndex
         This tool takes one or more paths and checks them for the presence of a git repository. If one exists, it writes a record into the database of the first and second commit hashes of the repository and the path to the repository.
         EBANNER
         opts.separator ""
-        opts.on("-d", "--database [PATH]", String, "The database file to write to. Defaults to $HOME/.git-index.db") do |path|
+        opts.on("-d", "--database [PATH]", "The database file to write to. Defaults to $HOME/.git-index.db") do |path|
           config["database"] = path
         end
         opts.on("-r", "--recurse", "Recursively search through the provided directories for git repositories.") do
@@ -40,21 +44,20 @@ module GitIndex
         opts.on("-n", "--dry-run", "Find git repositories, but do not actually store them in the database. This option doesn't do much without also specifying --verbose.") do
           config["dryrun"] = true
         end
+        opts.on("--help", "Show this help") do
+          puts opts
+          exit
+        end
         opts.on("--version", "Output #{version_string}") do
           puts version_string
           exit 0
         end
+
+        opts.invalid_option {|invalid_option| leftover_argv << invalid_option}
+
       end
 
-      leftover_argv = [] of String
-      begin
-        options.parse!(ARGV)
-      rescue OptionParser::InvalidOption
-        e.recover ARGV
-        leftover_argv << ARGV.shift
-        leftover_argv << ARGV.shift if ARGV.any? && (ARGV.first[0..0] != "-")
-        retry
-      end
+      options.parse
 
       ARGV.replace(leftover_argv) if leftover_argv.any?
 
