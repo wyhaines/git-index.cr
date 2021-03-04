@@ -3,11 +3,14 @@ require "find"
 require "./git-index/*"
 require "uri"
 
-class GitIndex
-  @config : Hash(String, Bool | String | Symbol)
+struct GitIndex
+  # @config : Hash(String, Bool | String | Symbol)
 
-  def initialize
-    @config = Config.parse_command_line
+  # def initialize
+  #   @config = Config.parse_command_line
+  # end
+
+  def initialize(@config : Hash(String, Bool | String | Symbol) = Config.parse_command_line)
   end
 
   def run

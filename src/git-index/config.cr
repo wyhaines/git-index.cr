@@ -1,6 +1,6 @@
 require "option_parser"
 
-class GitIndex
+struct GitIndex
   module Config
     def self.parse_command_line
       config = Hash(String, Bool | String | Symbol).new
