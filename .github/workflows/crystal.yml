@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - name: Install SQLite3
-      run: sudo apt install sqlite3 sqlite3-dev
+      run: apt install sqlite3 sqlite3-dev
     - uses: actions/checkout@v2
     - name: Install dependencies
       run: shards install
