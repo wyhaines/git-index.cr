@@ -1,9 +1,4 @@
 require "./spec_helper"
 
-describe Git::Index do
-  # TODO: Write tests
-
-  it "works" do
-    false.should eq(true)
-  end
+describe GitIndex do
 end

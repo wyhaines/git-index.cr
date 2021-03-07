@@ -111,7 +111,7 @@ struct GitIndex
   def query_records(db)
     ARGV.each do |hash_or_url|
       db.query("SELECT hash, path, url from repositories WHERE hash like ? or url = ?", "#{hash_or_url}%", hash_or_url) do |rs|
-        rs.each do  
+        rs.each do
           puts "#{rs.read(String)}: #{rs.read(String)}|#{rs.read(String)}"
         end
       end
