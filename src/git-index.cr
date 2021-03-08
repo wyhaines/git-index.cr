@@ -10,7 +10,9 @@ struct GitIndex
   #   @config = Config.parse_command_line
   # end
 
-  def initialize(@config : Hash(String, Bool | String | Symbol) = Config.parse_command_line)
+  def initialize(
+    @config : Hash(String, Bool | String | Symbol) = Config.parse_command_line
+    )
   end
 
   def run
@@ -67,9 +69,11 @@ struct GitIndex
     untrimmed_directories.select do |dir|
       system("git -C #{dir} rev-parse --is-inside-work-tree > /dev/null 2>&1")
     end
+
   end
 
   def index_git_repositories(db, dirs)
+    processed = [] of Array(String)
     dirs.each do |dir|
       codes = `git -C #{dir} rev-list --parents HEAD | tail -2`.split("\n")
       remote = `git -C #{dir} config --get remote.origin.url`.strip
@@ -78,13 +82,18 @@ struct GitIndex
       if hash =~ /^([\w\d]+)\s+([\w\d]+)$/
         hash = "#{$2}#{$1}"
       end
+      processed << [hash, File.expand_path(dir), remote]
       db.exec("INSERT INTO repositories (hash, path, url) VALUES (?, ?, ?)", hash, File.expand_path(dir), remote) unless @config["dryrun"]
       puts "#{hash} -> #{File.expand_path(dir)}" if @config["verbose"]
     end
+
+    processed
   end
 
   def delete_records(db)
+    processed = [] of Array(String)
     ARGV.each do |path_or_hash|
+      query_records(db, [path_or_hash]).each {|r| processed << r}
       if !URI.parse(path_or_hash).scheme.nil?
         puts "deleting url #{path_or_hash}" if @config["verbose"]
         db.exec("DELETE from repositories WHERE url = ?", path_or_hash) unless @config["dryrun"]
@@ -97,25 +106,34 @@ struct GitIndex
         db.exec("DELETE FROM repositories where hash like ?", "#{path_or_hash}%") unless @config["dryrun"]
       end
     end
+    processed
   end
 
   def list_records(db)
     puts "hash,path,url"
+    processed = [] of Array(String)
     db.query("SELECT hash, path, url FROM repositories") do |rs|
       rs.each do
-        puts [rs.read(String), rs.read(String), rs.read(String)].join(",")
+        result = [rs.read(String), rs.read(String), rs.read(String)]
+        processed << result
+        puts result.join(",")
       end
     end
+    processed
   end
 
-  def query_records(db)
-    ARGV.each do |hash_or_url|
-      db.query("SELECT hash, path, url from repositories WHERE hash like ? or url = ?", "#{hash_or_url}%", hash_or_url) do |rs|
+  def query_records(db, argv = ARGV)
+    processed = [] of Array(String)
+    argv.each do |hash_or_url|
+      db.query("SELECT hash, path, url from repositories WHERE hash like ? or url like ? or path like ?", "#{hash_or_url}%", "%#{hash_or_url}%", "%#{hash_or_url}%") do |rs|
         rs.each do
-          puts "#{rs.read(String)}: #{rs.read(String)}|#{rs.read(String)}"
+          result = [rs.read(String), rs.read(String), rs.read(String)]
+          processed << result
+          puts "#{result[0]}: #{result[1]}|#{result[2]}"
         end
       end
     end
+    processed
   end
 end
 
