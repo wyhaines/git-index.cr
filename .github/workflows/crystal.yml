@@ -15,9 +15,10 @@ jobs:
       image: crystallang/crystal
 
     steps:
-    - name: Install SQLite3
-      run: apt install sqlite3 libsqlite3-dev
     - uses: actions/checkout@v2
+    - name: Install SQLite3
+      run: |
+        sudo apt-get install -y sqlite3 libsqlite3-dev
     - name: Install dependencies
       run: shards install
     - name: Run tests
