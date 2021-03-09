@@ -15,7 +15,7 @@ jobs:
           revision: "${{ github.ref }}-${{ github.sha }}"
 
           # Optional
-          changelog: "See https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md for details"
+          changelog: "See https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md for details"
           description: "Generate a Release Marker"
           region: ${{ secrets.NEW_RELIC_REGION }}
           user: "${{ github.actor }}"

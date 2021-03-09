@@ -4,7 +4,7 @@ on:
   pull_request:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   change_alert:
@@ -22,7 +22,7 @@ jobs:
           applicationId: ${{ secrets.APPLICATION_ID }}
           revision: "git-index-change-alert-${{ github.ref }}-${{ github.sha }}"
 
-          changelog: "See https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md for details"
+          changelog: "See https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md for details"
           description: "Alerts to New Relic on code change events."
           region: ${{ secrets.NEW_RELIC_REGION }}
           user: "wyhaines"
