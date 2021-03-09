@@ -17,3 +17,4 @@ dependencies:
     github: crystal-lang/crystal-sqlite3
   find:
     github: wyhaines/find.cr
+

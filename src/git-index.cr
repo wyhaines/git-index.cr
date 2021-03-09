@@ -12,7 +12,7 @@ struct GitIndex
 
   def initialize(
     @config : Hash(String, Bool | String | Symbol) = Config.parse_command_line
-    )
+  )
   end
 
   def run
@@ -69,7 +69,6 @@ struct GitIndex
     untrimmed_directories.select do |dir|
       system("git -C #{dir} rev-parse --is-inside-work-tree > /dev/null 2>&1")
     end
-
   end
 
   def index_git_repositories(db, dirs)
@@ -93,7 +92,7 @@ struct GitIndex
   def delete_records(db)
     processed = [] of Array(String)
     ARGV.each do |path_or_hash|
-      query_records(db, [path_or_hash]).each {|r| processed << r}
+      query_records(db, [path_or_hash]).each { |r| processed << r }
       if !URI.parse(path_or_hash).scheme.nil?
         puts "deleting url #{path_or_hash}" if @config["verbose"]
         db.exec("DELETE from repositories WHERE url = ?", path_or_hash) unless @config["dryrun"]
