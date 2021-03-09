@@ -1,0 +1,28 @@
+name: New Relic Change Alerts
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  change_alert:
+    runs-on: ubuntu-latest
+    name: Change Alerts
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Do Alert
+        uses: newrelic/deployment-marker-action@v1
+        with:
+          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+          applicationId: ${{ secrets.APPLICATION_ID }}
+          revision: "git-index-change-alert-${{ github.ref }}-${{ github.sha }}"
+
+          changelog: "See https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md for details"
+          description: "Alerts to New Relic on code change events."
+          region: ${{ secrets.NEW_RELIC_REGION }}
+          user: "wyhaines"

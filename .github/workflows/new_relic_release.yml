@@ -1,0 +1,21 @@
+name: Release
+on:
+  - release
+
+jobs:
+  newrelic:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create New Relic release marker
+        uses: newrelic/deployment-marker-action@v1
+        with:
+          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+          applicationId: ${{ secrets.NEW_RELIC_APPLICATION_ID }}
+          revision: "${{ github.ref }}-${{ github.sha }}"
+
+          # Optional
+          changelog: "See https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md for details"
+          description: "Generate a Release Marker"
+          region: ${{ secrets.NEW_RELIC_REGION }}
+          user: "${{ github.actor }}"
