@@ -17,4 +17,7 @@ dependencies:
     github: crystal-lang/crystal-sqlite3
   find:
     github: wyhaines/find.cr
-
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+    version: ~> 0.13.0

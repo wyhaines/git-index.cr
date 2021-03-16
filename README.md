@@ -1,5 +1,9 @@
 # git-index
 
+![Git-Index CI](https://img.shields.io/github/workflow/status/wyhaines/git-index.cr/Git-Index%20CI?style=for-the-badge&logo=GitHub)
+[![GitHub release](https://img.shields.io/github/release/wyhaines/git-index.cr.svg?style=for-the-badge)](https://github.com/wyhaines/git-index.cr/releases)
+![GitHub commits since latest release (by SemVer)](https://img.shields.io/github/commits-since/wyhaines/git-index.cr/latest?style=for-the-badge)
+
 This tool takes a list of paths and checks them for git repositories. It writes to a sqlite database a table of repositories found, indexed by both the first and the second commit hashes on the repository. The rationale is that these first couple of commits are unlikely to ever change as the result of a rebase, and thus make a fairly reliable fingerprint of the identity of the repository. The motivation behind this tool is for use with  Serf and the `serf-hander` gem or the `serf-handler.cr` crystal implementation to power a slick, simple deployment manger utizing a git repo and deploy hooks at the underlying source and trigger.
 
 # Building It
@@ -44,3 +48,6 @@ git-index -h
 ```
 
 See all options.
+
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/wyhaines/git-index.cr?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues/wyhaines/git-index.cr?style=for-the-badge)

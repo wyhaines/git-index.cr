@@ -1,6 +1,8 @@
 name: Git-Index CI
 
 on:
+  schedule:
+    - cron:  '0 3 * * *'
   push:
     branches: [ main ]
   pull_request:
@@ -8,7 +10,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     container:
@@ -26,3 +27,12 @@ jobs:
       run: shards install
     - name: Run tests
       run: crystal spec
+    - name: Run Ameba
+      run: bin/ameba
+    - name: Build docs
+      run: crystal docs
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
