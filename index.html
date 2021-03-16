@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.35.1">
+<meta name="crystal_docs.project_version" content="1.0.2">
+<meta name="crystal_docs.project_name" content="git-index">
+
+
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+  <meta name="repository-name" content="git-index">
+  <title>git-index 1.0.2</title>
+  <script type="text/javascript">
+  CrystalDocs.base_path = "";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="index.html">
+          git-index
+        </a>
+      </h1>
+
+      <span class="project-version">
+        1.0.2
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent " data-id="git-index/GitIndex" data-name="gitindex">
+      <a href="GitIndex.html">GitIndex</a>
+      
+        <ul>
+  
+  <li class=" " data-id="git-index/GitIndex/Config" data-name="gitindex::config">
+      <a href="GitIndex/Config.html">Config</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1><a id="git-index" class="anchor" href="#git-index">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>git-index</h1>
+
+<p><img src="https://img.shields.io/github/workflow/status/wyhaines/git-index.cr/Git-Index%20CI?style=for-the-badge&logo=GitHub" alt="Git-Index CI"/>
+<a href="https://github.com/wyhaines/git-index.cr/releases"><img src="https://img.shields.io/github/release/wyhaines/git-index.cr.svg?style=for-the-badge" alt="GitHub release"/></a>
+<img src="https://img.shields.io/github/commits-since/wyhaines/git-index.cr/latest?style=for-the-badge" alt="GitHub commits since latest release (by SemVer)"/></p>
+
+<p>This tool takes a list of paths and checks them for git repositories. It writes to a sqlite database a table of repositories found, indexed by both the first and the second commit hashes on the repository. The rationale is that these first couple of commits are unlikely to ever change as the result of a rebase, and thus make a fairly reliable fingerprint of the identity of the repository. The motivation behind this tool is for use with  Serf and the <code>serf-hander</code> gem or the <code>serf-handler.cr</code> crystal implementation to power a slick, simple deployment manger utizing a git repo and deploy hooks at the underlying source and trigger.</p>
+
+<h1><a id="building-it" class="anchor" href="#building-it">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Building It</h1>
+
+<p>If you have crystal installed on your system, you can build the
+binary for git-index with:</p>
+
+<pre><code class="language-crystal">shards build -p -s -t --release</code></pre>
+
+<p>If you want to build a statically linked binary (which is better for distribution to other systems):</p>
+
+<pre><code class="language-crystal">shards build -p -s -t --release --static</code></pre>
+
+<p>In either case, the compiled binary will be found as <code>bin/git-index</code>.</p>
+
+<h2><a id="usage" class="anchor" href="#usage">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Usage</h2>
+
+<pre><code class="language-crystal">git-index /gluster/htdocs/site.doc.com</code></pre>
+
+<p>Add the given directory to the index.</p>
+
+<pre><code class="language-crystal">git<span class="o">-</span>index <span class="o">-</span>l</code></pre>
+
+<p>List all of the indexed hashes and their directories</p>
+
+<pre><code class="language-crystal">git<span class="o">-</span>index <span class="o">-</span>q d950c4bbe672fe02e36009d71d88ef4ab754fa91</code></pre>
+
+<p>Perform a lookup in the index to see if that has code matches a known repository, and returns the matches, one per line.</p>
+
+<pre><code class="language-crystal">git<span class="o">-</span>index <span class="o">-</span>h</code></pre>
+
+<p>See all options.</p>
+
+<p><img src="https://img.shields.io/github/languages/code-size/wyhaines/git-index.cr?style=for-the-badge" alt="GitHub code size in bytes"/>
+<img src="https://img.shields.io/github/issues/wyhaines/git-index.cr?style=for-the-badge" alt="GitHub issues"/></p>
+</div>
+</body>
+</html>

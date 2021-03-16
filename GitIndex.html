@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.35.1">
+<meta name="crystal_docs.project_version" content="1.0.2">
+<meta name="crystal_docs.project_name" content="git-index">
+
+
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+  <meta name="repository-name" content="git-index">
+  <title>GitIndex - git-index 1.0.2</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="index.html">
+          git-index
+        </a>
+      </h1>
+
+      <span class="project-version">
+        1.0.2
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="git-index/GitIndex" data-name="gitindex">
+      <a href="GitIndex.html">GitIndex</a>
+      
+        <ul>
+  
+  <li class=" " data-id="git-index/GitIndex/Config" data-name="gitindex::config">
+      <a href="GitIndex/Config.html">Config</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">struct</span> GitIndex
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="GitIndex.html">GitIndex</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+
+
+
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="VERSION">
+        <strong>VERSION</strong> = <code><span class="s">&quot;1.0.3&quot;</span></code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(config:Hash(String,Bool%7CString%7CSymbol)=Config.parse_command_line)-class-method" class="signature"><strong>.new</strong>(config : Hash(String, Bool | String | Symbol) = <span class="t">Config</span>.parse_command_line)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#database-instance-method" class="signature"><strong>#database</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#delete_records(db)-instance-method" class="signature"><strong>#delete_records</strong>(db)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#git_directories-instance-method" class="signature"><strong>#git_directories</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#index_git_repositories(db,dirs)-instance-method" class="signature"><strong>#index_git_repositories</strong>(db, dirs)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#list_records(db)-instance-method" class="signature"><strong>#list_records</strong>(db)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#query_records(db,argv=ARGV)-instance-method" class="signature"><strong>#query_records</strong>(db, argv = <span class="t">ARGV</span>)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#run-instance-method" class="signature"><strong>#run</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(config:Hash(String,Bool|String|Symbol)=Config.parse_command_line)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(config : Hash(String, Bool | String | Symbol) = <span class="t">Config</span>.parse_command_line)
+
+        <a class="method-permalink" href="#new(config:Hash(String,Bool%7CString%7CSymbol)=Config.parse_command_line)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="database-instance-method">
+      <div class="signature">
+        
+        def <strong>database</strong>
+
+        <a class="method-permalink" href="#database-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="delete_records(db)-instance-method">
+      <div class="signature">
+        
+        def <strong>delete_records</strong>(db)
+
+        <a class="method-permalink" href="#delete_records(db)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="git_directories-instance-method">
+      <div class="signature">
+        
+        def <strong>git_directories</strong>
+
+        <a class="method-permalink" href="#git_directories-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="index_git_repositories(db,dirs)-instance-method">
+      <div class="signature">
+        
+        def <strong>index_git_repositories</strong>(db, dirs)
+
+        <a class="method-permalink" href="#index_git_repositories(db,dirs)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="list_records(db)-instance-method">
+      <div class="signature">
+        
+        def <strong>list_records</strong>(db)
+
+        <a class="method-permalink" href="#list_records(db)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="query_records(db,argv=ARGV)-instance-method">
+      <div class="signature">
+        
+        def <strong>query_records</strong>(db, argv = <span class="t">ARGV</span>)
+
+        <a class="method-permalink" href="#query_records(db,argv=ARGV)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="run-instance-method">
+      <div class="signature">
+        
+        def <strong>run</strong>
+
+        <a class="method-permalink" href="#run-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
