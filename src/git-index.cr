@@ -35,7 +35,7 @@ struct GitIndex
     db = DB.open @config["database"].to_s
 
     begin
-      db.query("select 1 from repositories") do |row|
+      db.query("select 1 from repositories") do |_row|
         break
       end
     rescue

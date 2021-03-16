@@ -11,8 +11,6 @@ struct GitIndex
         "dryrun"   => false,
       }.each { |k, v| config[k] = v }
 
-      leftover_argv = [] of String
-
       _commands = [] of Symbol
       options = OptionParser.new do |opts|
         opts.banner = <<-EBANNER
@@ -30,7 +28,7 @@ struct GitIndex
         opts.on("-l", "--list", "List the known repositories") do
           _commands << :list
         end
-        opts.on("-q", "--query", "The command line arguments are assumed to be hashes to query for int he database. Matches will be returned, one per line, in the same order the hashes appear on the command line.") do |hash|
+        opts.on("-q", "--query", "The command line arguments are assumed to be hashes to query for in the database. Matches will be returned, one per line, in the same order the hashes appear on the command line.") do |_hash|
           _commands << :query
         end
         opts.on("-x", "--delete", "The command line arguments are assumed to be hashes or paths to delete from the databse.") do
