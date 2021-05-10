@@ -8,7 +8,7 @@ targets:
   git-index:
     main: src/git-index.cr
 
-crystal: 0.36.1
+crystal: "*"
 
 license: "Apache 2.0"
 
